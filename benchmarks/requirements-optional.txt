@@ -1,0 +1,3 @@
+# Optional (external evaluation model). If missing, that model is skipped without aborting the run.
+# Installed with torch PINNED (constraint) so the CUDA build is not replaced.
+pytabkit>=1.7      # RealMLP-TD

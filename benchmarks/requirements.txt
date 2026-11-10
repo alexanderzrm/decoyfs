@@ -1,0 +1,14 @@
+# torch is NOT listed here: install it separately for your driver (see the README, GPU section)
+packaging
+decoyfs
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+scikit-learn>=1.4
+xgboost>=3.0
+matplotlib>=3.7
+statsmodels>=0.14
+nbformat>=5.9
+openml>=0.14
+jupyter
+ipykernel

@@ -1,0 +1,14 @@
+# Exact versions used to produce the paper results (Python 3.11.9, Windows 11).
+# torch is installed separately for your GPU driver (see README, GPU section):
+#   RTX 50xx (Blackwell): torch==2.7+ from https://download.pytorch.org/whl/cu128
+#   older GPUs / CPU:     torch==2.6.0
+numpy==2.0.0
+scipy==1.14.1
+pandas==2.2.2
+scikit-learn==1.5.2
+xgboost==3.2.0
+statsmodels==0.14.2
+matplotlib==3.9.2
+openml==0.15.1
+nbformat==5.9.2
+ipykernel==6.29.5

@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "DecoyFS: decoy-referenced feature selection"
+type: software
+version: 0.1.0
+date-released: "2026-11-04"
+license: MIT
+repository-code: "https://github.com/alexanderzrm/decoyfs"
+keywords:
+  - feature selection
+  - decoy features
+  - shadow features
+  - random probes
+  - tabular data
+authors:
+  - family-names: "Zermeño Campos"
+    given-names: "Nestor A."
+    orcid: "https://orcid.org/0000-0002-4638-4682"
+    email: "nestor.zermeno@uabc.edu.mx"
+    affiliation: "Universidad Autónoma de Baja California"
+abstract: >-
+  DecoyFS selects features by comparing real features against decoy (control) features, namely Random probes and
+  Shadow copies, using several heterogeneous rankers and an auditable vote policy. Every component (rankers,
+  controls, policy) is swappable; Boruta-style, CV-k and fixed-k comparators are included.

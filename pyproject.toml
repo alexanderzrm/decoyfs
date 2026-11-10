@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decoyfs"
+dynamic = ["version"]
+description = "Decoy-referenced feature selection: Random and Shadow control features, swappable rankers and auditable vote policies."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nestor A. Zermeño Campos", email = "nestor.zermeno@uabc.edu.mx" }]
+keywords = ["feature selection", "decoy features", "shadow features", "random probes", "boruta", "scikit-learn", "tabular"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26,<3",
+    "scipy>=1.11,<2",
+    "pandas>=2.0,<3",
+    "scikit-learn>=1.4,<2",
+    "xgboost>=2.0,<4",
+    "torch>=2.2",
+]
+
+[project.optional-dependencies]
+bench = [
+    "statsmodels>=0.14",
+    "matplotlib>=3.8",
+    "openml>=0.14",
+    "nbformat>=5.9",
+    "ipykernel>=6.29",
+]
+bench-extra = ["pytabkit>=1.5"]
+dev = ["pytest>=8", "ruff>=0.5", "build>=1.2", "twine>=5"]
+
+[project.urls]
+Homepage = "https://github.com/alexanderzrm/decoyfs"
+Issues = "https://github.com/alexanderzrm/decoyfs/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "decoyfs.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+decoyfs = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E501", "E702", "E731", "E741", "F841"]
