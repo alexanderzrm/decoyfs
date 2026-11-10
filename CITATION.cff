@@ -3,8 +3,10 @@ message: "If you use this software, please cite it using the metadata below."
 title: "DecoyFS: decoy-referenced feature selection"
 type: software
 version: 0.1.0
-date-released: "2026-11-04"
+date-released: "2026-11-09"
 license: MIT
+doi: 10.5281/zenodo.24100379
+url: "https://pypi.org/project/decoyfs/"
 repository-code: "https://github.com/alexanderzrm/decoyfs"
 keywords:
   - feature selection
