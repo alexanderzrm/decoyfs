@@ -16,7 +16,7 @@ from .rankers import list_rankers, register_ranker, unregister_ranker
 from .selectors import BorutaSelector, CVKSelector, FixedKSelector, NABFSSelector
 from .validation import DecoyInputError
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "DecoySelector", "FixedKSelector", "CVKSelector", "BorutaSelector", "NABFSSelector", "compare_selectors",

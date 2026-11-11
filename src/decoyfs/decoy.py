@@ -54,6 +54,15 @@ class DecoySelector(BaseSelector):
     null_pass_rate_ : dict
         Fraction of Random / Shadow decoys that would be inside the selected set (empirical proxy of the false-selection
         rate; NOT a formal FDR guarantee).
+    fdp_estimate_ : dict
+        Target-decoy estimates of the false-discovery proportion of the selected set, ``{"shadow": ..., "vote": ...}``,
+        computed as ``min(1, FPR * (p - |S|) / |S|)``. ``"vote"`` uses the fraction of Shadow copies that the vote
+        policy would keep (only for ``"all"``, ``"majority"``, ``"any"`` or an integer policy) and was the most accurate
+        in our simulation study (Spearman 0.58, mean absolute error 0.19 against the true FDP, 1,200 scenarios);
+        ``"shadow"`` uses the Shadow null-pass rate and tends to overestimate. Both are NaN with the stability filter,
+        with Block-Shadow or a single control type, after a fallback, and for callable or custom policies. They are
+        empirical estimates: they carry no coverage guarantee and are least reliable for ``n`` below about 300 and for
+        non-monotone (XOR-like) signals.
     fallback_ : bool
         True if the policy returned an empty set and the 3 top-consensus features were returned instead.
     ranker_errors_ : dict
@@ -197,4 +206,19 @@ class DecoySelector(BaseSelector):
         if "shad" in idx and "rand" not in idx:
             ns = P.null_rate(sel, c, idx, "shad")
         self.null_pass_rate_ = dict(random=nr, shadow=ns)
+        self.fdp_estimate_ = self._fdp_estimate(sel, ns, scores, idx, ctr, p)
         return sel
+
+    def _fdp_estimate(self, sel, shadow_rate, scores, idx, ctr, p):
+        """Target-decoy FDP estimates; NaN where they were not validated (see ``fdp_estimate_``)."""
+        out = dict(shadow=np.nan, vote=np.nan)
+        pol = self.policy
+        vote_defined = (isinstance(pol, str) and pol in ("all", "majority", "any")) or \
+            (isinstance(pol, (int, np.integer)) and not isinstance(pol, bool))
+        if self.fallback_ or self.stability_B > 0 or set(ctr) != {"random", "shadow"}:
+            return out
+        out["shadow"] = P.estimate_fdp(shadow_rate, len(sel), p)
+        if vote_defined:
+            thr = P.vote_threshold(pol, len(scores))
+            out["vote"] = P.estimate_fdp(P.vote_null_pass(scores, idx, self.alpha, ctr, thr), len(sel), p)
+        return out

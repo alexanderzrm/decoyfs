@@ -122,6 +122,30 @@ def null_pass_rates(sel, c, idx):
     return float((c[idx["rand"]] >= cmin).mean()), float((c[idx["shad"]] >= cmin).mean())
 
 
+def estimate_fdp(fpr, n_selected, n_features):
+    """Target-decoy estimate of the false-discovery proportion: ``min(1, fpr * (p - |S|) / |S|)``.
+
+    ``fpr`` is a decoy-based false-positive rate (fraction of decoys that would pass the cutoff), ``n_selected`` the
+    size of the selected set and ``n_features`` the number of candidate features ``p``; ``p - |S|`` approximates the
+    number of null features. Returns NaN for an empty selection or a non-finite ``fpr``. It is an empirical estimate
+    without a coverage guarantee (see the calibration study in the paper).
+    """
+    if n_selected <= 0 or not np.isfinite(fpr):
+        return float("nan")
+    return float(min(1.0, fpr * max(n_features - n_selected, 0) / n_selected))
+
+
+def vote_null_pass(scores, idx, alpha, controls, threshold):
+    """Fraction of Shadow copies that a vote policy would keep.
+
+    Each Shadow copy is judged as if it were a real feature, with the same per-ranker rule (beat the best Random probe
+    and the ``1 - alpha`` Shadow quantile) and the same vote threshold as the policy.
+    """
+    shadow_as_real = {"real": idx["shad"], "rand": idx["rand"], "shad": idx["shad"]}
+    votes = vote_counts(flags(scores, shadow_as_real, alpha, controls))
+    return float((votes >= threshold).mean())
+
+
 def ablation_sets(scores, idx, alpha=0.05):
     """Protocol ablations computed ONLY from the scores already obtained (cost ~0).
 
