@@ -1,4 +1,4 @@
-# Architecture: swappable blocks
+# Architecture: modular blocks
 
 ```mermaid
 flowchart LR
