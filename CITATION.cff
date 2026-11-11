@@ -23,11 +23,11 @@ keywords:
   - random probes
   - tabular data
 authors:
-  - family-names: "ZermeÃ±o Campos"
+  - family-names: "Zermeño Campos"
     given-names: "Nestor A."
     orcid: "https://orcid.org/0000-0002-4638-4682"
     email: "nestor.zermeno@uabc.edu.mx"
-    affiliation: "Universidad AutÃ³noma de Baja California"
+    affiliation: "Universidad Autónoma de Baja California"
 abstract: >-
   DecoyFS selects features by comparing real features against decoy (control) features, namely Random probes and
   Shadow copies, using several heterogeneous rankers and an auditable vote policy. Rankers and policies are extensible and the controls are selectable; Boruta-style, CV-k and fixed-k comparators are included.
