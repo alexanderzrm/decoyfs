@@ -30,5 +30,4 @@ authors:
     affiliation: "Universidad AutÃ³noma de Baja California"
 abstract: >-
   DecoyFS selects features by comparing real features against decoy (control) features, namely Random probes and
-  Shadow copies, using several heterogeneous rankers and an auditable vote policy. Every component (rankers,
-  controls, policy) is swappable; Boruta-style, CV-k and fixed-k comparators are included.
+  Shadow copies, using several heterogeneous rankers and an auditable vote policy. Rankers and policies are extensible and the controls are selectable; Boruta-style, CV-k and fixed-k comparators are included.
