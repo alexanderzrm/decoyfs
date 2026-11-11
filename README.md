@@ -8,7 +8,7 @@
 * **Random probes**: pure-noise columns. A feature must outscore the best probe.
 * **Shadow features**: each real column independently permuted. A feature must outscore the `1 - alpha` quantile of its shadows.
 * **Heterogeneous rankers** (ANOVA, chi², mutual information, ReliefF, random forest, XGBoost gain, L1 logistic regression) vote; a **policy** (`all`, `majority`, `any`, an integer or your own function) turns the votes into the subset.
-* **Every block is swappable**: add or remove rankers, controls and policies. Boruta-style, CV-k and fixed-k comparators are bundled so you can compare on your own data.
+* **Modular by design**: add or remove rankers and policies (via ``register_ranker`` / ``register_policy``), and choose among the ``random``, ``shadow`` and ``block`` controls. Boruta-style, CV-k and fixed-k comparators are bundled so you can compare on your own data.
 
 > Honest scope. In our benchmark (74 datasets, 5×2 CV, 4 downstream models) DecoyFS is **non-inferior (margin 0.01 AUROC) to using all features and to the comparators**, keeps roughly half of the features (median), is **~10× cheaper than Boruta-style selection** (median time ratio), and is **auditable and tunable** (`policy` moves you along the precision–recall frontier). It does **not** beat Boruta in false-discovery proportion or parsimony; the empirical null-pass rate it reports is a proxy, not a formal FDR guarantee. See the paper for details.
 
