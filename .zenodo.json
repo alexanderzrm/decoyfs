@@ -11,5 +11,8 @@
   ],
   "license": "MIT",
   "keywords": ["feature selection", "decoy features", "shadow features", "random probes", "tabular data", "benchmark"],
+  "related_identifiers": [
+    {"identifier": "10.5281/zenodo.24145463", "relation": "isSupplementedBy", "resource_type": "dataset", "scheme": "doi"}
+  ],
   "access_right": "open"
 }
