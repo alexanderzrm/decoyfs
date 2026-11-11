@@ -5,7 +5,7 @@ flowchart LR
     D[("X, y")] --> V["Validation<br/>DecoyInputError"]
     V --> PP["Preprocessing (train only)<br/>impute, drop constants,<br/>Yeo-Johnson, robust scale"]
     PP --> C
-    subgraph C["Decoys (swappable)"]
+    subgraph C["Decoys (selectable)"]
         direction TB
         R["Random probes"]
         S["Shadow copies"]
