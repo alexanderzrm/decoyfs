@@ -1,5 +1,8 @@
 # DecoyFS
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24100379.svg)](https://doi.org/10.5281/zenodo.24100379)
+[![PyPI](https://img.shields.io/pypi/v/decoyfs.svg)](https://pypi.org/project/decoyfs/)
+
 **Decoy-referenced feature selection** for tabular classification. DecoyFS keeps a feature only if it beats *decoys* — columns whose relationship with the target is known to be null — according to several heterogeneous rankers. The result is a small, auditable subset: for every feature you can see which rankers voted for it and how it compared with the decoys.
 
 * **Random probes**: pure-noise columns. A feature must outscore the best probe.
@@ -30,7 +33,10 @@ sel.selected_features_      # names (DataFrame input) or column indices
 sel.report_                 # per-feature audit trail: votes, beat_random / beat_shadow fractions, per-ranker scores
 sel.decoy_thresholds_       # the bar each ranker set (Random max, Shadow quantile)
 sel.null_pass_rate_         # fraction of decoys that would have been selected (empirical FPR proxy)
+sel.fdp_estimate_          # target-decoy estimate of the false-discovery proportion: {"shadow": ..., "vote": ...}
 ```
+
+`fdp_estimate_["vote"]` is an empirical estimate, not a guarantee: in a simulation of 1,200 scenarios it correlated with the true FDP at Spearman 0.58 (mean absolute error 0.19), ordered the policies well within a dataset, and was least reliable for n ≲ 300 and XOR-like signals. Read it as the relative price of each `policy`, not as an FDR. It is NaN with the stability filter, Block-Shadow, or custom/callable policies.
 
 It is a scikit-learn transformer, so it works in a `Pipeline`:
 
@@ -113,7 +119,7 @@ Datasets are downloaded from OpenML into `~/.cache/decoyfs` (override with `DECO
 
 ## Cite
 
-See [CITATION.cff](CITATION.cff). A software DOI is minted by Zenodo for every release.
+See [CITATION.cff](CITATION.cff). Archived on Zenodo: [10.5281/zenodo.24100379](https://doi.org/10.5281/zenodo.24100379).
 
 ## License
 
