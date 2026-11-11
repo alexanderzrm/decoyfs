@@ -217,5 +217,38 @@ def test_compare_selectors(data):
     assert df.groupby("selector")["auroc"].mean().min() > 0.8
 
 
+def test_fdp_estimate(data):
+    X, y = data
+    s = DecoySelector(rankers=FAST, random_state=0).fit(X, y)
+    est = s.fdp_estimate_
+    assert set(est) == {"shadow", "vote"}
+    assert 0.0 <= est["vote"] <= 1.0 and 0.0 <= est["shadow"] <= 1.0
+    # recompute by hand from the audit quantities
+    p = int(s.report_["used"].sum())
+    k = int(s.support_.sum())
+    assert est["shadow"] == pytest.approx(min(1.0, s.null_pass_rate_["shadow"] * (p - k) / k))
+    # stricter policy -> no larger estimated FDP on average signal data is not guaranteed, but it must stay defined
+    for pol in ("all", "any", 2):
+        e = DecoySelector(rankers=FAST, policy=pol, random_state=0).fit(X, y).fdp_estimate_
+        assert np.isfinite(e["vote"])
+
+
+def test_fdp_estimate_not_available():
+    X, y = make_data()
+    assert np.isnan(DecoySelector(rankers=("anova", "rf"), policy=lambda v, M, c: np.where(v >= 1)[0]).fit(X, y)
+                    .fdp_estimate_["vote"])
+    assert np.isnan(DecoySelector(rankers=("anova", "rf"), stability_B=3).fit(X, y).fdp_estimate_["vote"])
+    assert np.isnan(DecoySelector(rankers=("anova", "rf"), controls=("random", "block")).fit(X, y)
+                    .fdp_estimate_["shadow"])
+
+
+def test_estimate_fdp_function():
+    assert P.estimate_fdp(0.1, 10, 110) == pytest.approx(1.0)
+    assert P.estimate_fdp(0.05, 10, 110) == pytest.approx(0.5)
+    assert P.estimate_fdp(0.5, 5, 100) == 1.0           # clipped
+    assert np.isnan(P.estimate_fdp(0.1, 0, 100))
+    assert np.isnan(P.estimate_fdp(float("nan"), 5, 100))
+
+
 def test_version():
-    assert decoyfs.__version__ == "0.1.0"
+    assert decoyfs.__version__ == "0.1.1"
