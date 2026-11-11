@@ -4,7 +4,7 @@ title: "DecoyFS: decoy-referenced feature selection"
 type: software
 version: 0.1.1
 date-released: "2026-11-11"
-doi: 10.5281/zenodo.24100379
+doi: 10.5281/zenodo.24100378
 license: MIT
 repository-code: "https://github.com/alexanderzrm/decoyfs"
 url: "https://pypi.org/project/decoyfs/"

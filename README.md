@@ -1,6 +1,6 @@
 # DecoyFS
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24100379.svg)](https://doi.org/10.5281/zenodo.24100379)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24100378.svg)](https://doi.org/10.5281/zenodo.24100378)
 [![PyPI](https://img.shields.io/pypi/v/decoyfs.svg)](https://pypi.org/project/decoyfs/)
 
 **Decoy-referenced feature selection** for tabular classification. DecoyFS keeps a feature only if it beats *decoys* — columns whose relationship with the target is known to be null — according to several heterogeneous rankers. The result is a small, auditable subset: for every feature you can see which rankers voted for it and how it compared with the decoys.
@@ -119,7 +119,7 @@ Datasets are downloaded from OpenML into `~/.cache/decoyfs` (override with `DECO
 
 ## Cite
 
-See [CITATION.cff](CITATION.cff). Archived on Zenodo: [10.5281/zenodo.24100379](https://doi.org/10.5281/zenodo.24100379).
+See [CITATION.cff](CITATION.cff). Archived on Zenodo (all versions): [10.5281/zenodo.24100378](https://doi.org/10.5281/zenodo.24100378).
 
 ## License
 
