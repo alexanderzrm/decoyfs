@@ -8,6 +8,14 @@ doi: 10.5281/zenodo.24100378
 license: MIT
 repository-code: "https://github.com/alexanderzrm/decoyfs"
 url: "https://pypi.org/project/decoyfs/"
+references:
+  - type: dataset
+    title: "DecoyFS: benchmark results and calibration study"
+    doi: 10.5281/zenodo.24145463
+    year: 2026
+    authors:
+      - family-names: "Zermeno Campos"
+        given-names: "Nestor A."
 keywords:
   - feature selection
   - decoy features

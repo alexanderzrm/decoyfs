@@ -121,6 +121,8 @@ Datasets are downloaded from OpenML into `~/.cache/decoyfs` (override with `DECO
 
 See [CITATION.cff](CITATION.cff). Archived on Zenodo (all versions): [10.5281/zenodo.24100378](https://doi.org/10.5281/zenodo.24100378).
 
+The per-fold benchmark results and the calibration study that accompany the paper are archived separately: [10.5281/zenodo.24145463](https://doi.org/10.5281/zenodo.24145463).
+
 ## License
 
 MIT © Nestor A. Zermeño Campos, Universidad Autónoma de Baja California.
