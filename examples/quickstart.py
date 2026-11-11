@@ -10,6 +10,7 @@ print("selected columns:", sel.selected_features_)
 print(sel.report_.sort_values("votes", ascending=False).head(10)[["feature", "votes", "frac_beat_random",
                                                                     "frac_beat_shadow", "selected"]])
 print("null-pass rate:", sel.null_pass_rate_)
+print("estimated FDP:", sel.fdp_estimate_)
 
 res = compare_selectors(
     X, y,
