@@ -43,10 +43,10 @@ flowchart LR
 3. Score real features and decoys with every ranker (GPU when available).
 4. A ranker *votes* for a feature if the feature beats the highest Random score **and** the `1 - alpha` quantile of the Shadow scores.
 5. The policy maps votes to the subset. Optionally, keep only features selected in ≥ `stability_pi` of `stability_B` subsamples.
-6. Store `report_`, `decoy_thresholds_` and `null_pass_rate_`.
+6. Store `report_`, `decoy_thresholds_`, `null_pass_rate_` and `fdp_estimate_`.
 
 ## Guarantees and limits
 
-* The Random/Shadow comparison calibrates *noise level*, not a formal false-discovery rate. `null_pass_rate_` is an empirical proxy.
+* The Random/Shadow comparison calibrates *noise level*, not a formal false-discovery rate. `null_pass_rate_` is an empirical proxy, and `fdp_estimate_` rescales it as a target-decoy estimate (`min(1, FPR·(p − |S|)/|S|)`); it has no coverage guarantee.
 * Shadow features break dependence between columns; with strongly correlated groups use `controls=("random", "block")`.
 * Classification only; numeric features only.
