@@ -1,7 +1,7 @@
 {
   "title": "DecoyFS: decoy-referenced feature selection",
   "upload_type": "software",
-  "description": "<p>DecoyFS selects features by comparing real features against decoy (control) features, namely Random probes and Shadow copies, using several heterogeneous rankers and an auditable vote policy. Rankers, controls and policies are swappable; Boruta-style, CV-k and fixed-k comparators are included. Includes the benchmark harness used in the accompanying paper.</p>",
+  "description": "<p>DecoyFS selects features by comparing real features against decoy (control) features, namely Random probes and Shadow copies, using several heterogeneous rankers and an auditable vote policy. Rankers and policies are extensible and controls are selectable; Boruta-style, CV-k and fixed-k comparators are included. Includes the benchmark harness used in the accompanying paper.</p>",
   "creators": [
     {
       "name": "Zermeño Campos, Nestor A.",
